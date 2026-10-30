@@ -79,11 +79,11 @@ SUPABASE_PUBLISHABLE_KEY="your_anon_key"
 VITE_SUPABASE_PUBLISHABLE_KEY="your_anon_key"
 
 # ─── Encryption & Security Keys ────────────────────────────────────────────────
-# 32-byte base64 strings used for AES-GCM token encryption and HMAC share tokens
-GITHUB_TOKEN_ENCRYPTION_KEY="mfmpGlm/M59OhplxJ0rz5oqVgncshH+UGisf0H4ku9o="
-SHARE_LINK_SIGNING_KEY="7DlHO5LXxUcLOwnffjYStuMRQBo1R0hC4S8efx+RVyU="
-APP_USER_CONNECTION_KEY_SECRET="ksfoAtUz/WywTbmJPzx0SOneLI1jLVzPpYxBJJeYZ/s="
-CRON_SECRET="2QBX/jbR6yjOJQ6HAxLB6Ddv/F2EUAYwp43vmKH/JTg="
+# 32-byte base64 strings (generate with: node -e "console.log(require('crypto').randomBytes(32).toString('base64'))")
+GITHUB_TOKEN_ENCRYPTION_KEY="your_32_byte_base64_encryption_key"
+SHARE_LINK_SIGNING_KEY="your_32_byte_base64_signing_key"
+APP_USER_CONNECTION_KEY_SECRET="your_32_byte_base64_secret"
+CRON_SECRET="your_secure_cron_secret"
 
 # ─── AI Configuration ──────────────────────────────────────────────────────────
 # Get a free key from https://aistudio.google.com/app/apikey
