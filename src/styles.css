@@ -1,0 +1,226 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * ShipLog design system: cream paper, ink text, serif italic display,
+ * lavender bordered call-to-action buttons and a deep green brand accent.
+ * All colors are oklch.
+ */
+
+@theme inline {
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "EB Garamond", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-lavender: var(--lavender);
+  --color-lavender-foreground: var(--lavender-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6);
+  --color-chart-7: var(--chart-7);
+  --color-heat-0: var(--heat-0);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.988 0.018 104);
+  --foreground: oklch(0.2 0.012 160);
+  --card: oklch(0.996 0.008 104);
+  --card-foreground: oklch(0.2 0.012 160);
+  --popover: oklch(0.996 0.008 104);
+  --popover-foreground: oklch(0.2 0.012 160);
+  --primary: oklch(0.36 0.05 182);
+  --primary-foreground: oklch(0.985 0.018 104);
+  --secondary: oklch(0.955 0.02 104);
+  --secondary-foreground: oklch(0.25 0.012 160);
+  --muted: oklch(0.955 0.02 104);
+  --muted-foreground: oklch(0.48 0.015 160);
+  --accent: oklch(0.94 0.022 104);
+  --accent-foreground: oklch(0.2 0.012 160);
+  --lavender: oklch(0.91 0.055 302);
+  --lavender-foreground: oklch(0.2 0.012 160);
+  --success: oklch(0.52 0.09 160);
+  --success-foreground: oklch(0.985 0.018 104);
+  --destructive: oklch(0.56 0.19 27);
+  --destructive-foreground: oklch(0.985 0.018 104);
+  --border: oklch(0.89 0.018 104);
+  --input: oklch(0.86 0.02 104);
+  --ring: oklch(0.36 0.05 182);
+  --chart-1: oklch(0.36 0.05 182);
+  --chart-2: oklch(0.7 0.09 302);
+  --chart-3: oklch(0.6 0.1 60);
+  --chart-4: oklch(0.55 0.08 230);
+  --chart-5: oklch(0.65 0.12 30);
+  --chart-6: oklch(0.6 0.09 140);
+  --chart-7: oklch(0.72 0.02 104);
+  --heat-0: oklch(0.92 0.02 104);
+  --sidebar: oklch(0.975 0.02 104);
+  --sidebar-foreground: oklch(0.2 0.012 160);
+  --sidebar-primary: oklch(0.36 0.05 182);
+  --sidebar-primary-foreground: oklch(0.985 0.018 104);
+  --sidebar-accent: oklch(0.94 0.022 104);
+  --sidebar-accent-foreground: oklch(0.2 0.012 160);
+  --sidebar-border: oklch(0.89 0.018 104);
+  --sidebar-ring: oklch(0.36 0.05 182);
+}
+
+.dark {
+  --background: oklch(0.19 0.018 182);
+  --foreground: oklch(0.95 0.02 104);
+  --card: oklch(0.225 0.02 182);
+  --card-foreground: oklch(0.95 0.02 104);
+  --popover: oklch(0.225 0.02 182);
+  --popover-foreground: oklch(0.95 0.02 104);
+  --primary: oklch(0.86 0.07 302);
+  --primary-foreground: oklch(0.19 0.018 182);
+  --secondary: oklch(0.27 0.02 182);
+  --secondary-foreground: oklch(0.95 0.02 104);
+  --muted: oklch(0.26 0.02 182);
+  --muted-foreground: oklch(0.72 0.02 104);
+  --accent: oklch(0.28 0.022 182);
+  --accent-foreground: oklch(0.95 0.02 104);
+  --lavender: oklch(0.42 0.08 302);
+  --lavender-foreground: oklch(0.97 0.015 104);
+  --success: oklch(0.72 0.1 160);
+  --success-foreground: oklch(0.19 0.018 182);
+  --destructive: oklch(0.68 0.17 25);
+  --destructive-foreground: oklch(0.19 0.018 182);
+  --border: oklch(0.32 0.02 182);
+  --input: oklch(0.36 0.02 182);
+  --ring: oklch(0.86 0.07 302);
+  --chart-1: oklch(0.86 0.07 302);
+  --chart-2: oklch(0.72 0.1 160);
+  --chart-3: oklch(0.75 0.1 70);
+  --chart-4: oklch(0.7 0.08 230);
+  --chart-5: oklch(0.7 0.12 30);
+  --chart-6: oklch(0.7 0.1 140);
+  --chart-7: oklch(0.5 0.02 182);
+  --heat-0: oklch(0.3 0.02 182);
+  --sidebar: oklch(0.21 0.02 182);
+  --sidebar-foreground: oklch(0.95 0.02 104);
+  --sidebar-primary: oklch(0.86 0.07 302);
+  --sidebar-primary-foreground: oklch(0.19 0.018 182);
+  --sidebar-accent: oklch(0.28 0.022 182);
+  --sidebar-accent-foreground: oklch(0.95 0.02 104);
+  --sidebar-border: oklch(0.32 0.02 182);
+  --sidebar-ring: oklch(0.86 0.07 302);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+  font-feature-settings: "liga", "dlig";
+  letter-spacing: -0.015em;
+}
+
+@utility eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+  font-weight: 500;
+}
+
+/* Plain textarea that grows with its content. No key handling involved. */
+@utility autogrow {
+  field-sizing: content;
+}
+
+/* Rendered markdown */
+@utility prose-shiplog {
+  line-height: 1.7;
+  & h1 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    line-height: 1.15;
+    margin: 0 0 1rem;
+  }
+  & h2 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    margin: 1.75rem 0 0.5rem;
+  }
+  & h3 {
+    font-weight: 600;
+    margin: 1.25rem 0 0.4rem;
+  }
+  & p {
+    margin: 0.6rem 0;
+  }
+  & ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+    margin: 0.4rem 0;
+  }
+  & li {
+    margin: 0.2rem 0;
+  }
+  & strong {
+    font-weight: 600;
+  }
+  & em {
+    color: var(--color-muted-foreground);
+  }
+  & a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}

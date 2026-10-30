@@ -1,0 +1,17 @@
+
+# Architecture rules
+
+- Backend logic the brief calls "edge functions" (save-github-connection, github-sync, generate-entry, generate-report) lives in TanStack server functions in `src/lib/*.functions.ts`; heavy logic in `*.server.ts`. Why: this stack runs server code in server functions, and the browser still only calls our own endpoints.
+- `github_connections` has RLS on and no policies, and no grants to anon/authenticated; only server code with the service role touches it. The UI reads status via the `connection_status()` RPC. Why: the token must never be selectable from the browser.
+- GitHub tokens are encrypted with AES-GCM using the `GITHUB_TOKEN_ENCRYPTION_KEY` secret before storage (`src/lib/crypto.server.ts`). Why: defense in depth if the table is ever exposed.
+- GitHub activity rows upsert on `(user_id, external_id)` with stable ids like `commit:<sha>`, `review:<id>`. Why: repeated syncs must never duplicate rows.
+- Day grouping always uses `dateInTz` with the profile timezone; GitHub queries widen the UTC range by one day and filter by local day. Why: GitHub search qualifiers are UTC.
+- AI output is validated in code (`src/lib/grounding.ts`) and reports are assembled in code from approved items; stats are computed in `src/lib/stats.ts`, never by the model. Why: every item and number must be grounded.
+- Nightly sync is a managed HTTP schedule calling `/api/public/jobs/github-sync-nightly` (auth via `authenticateCronRequest`); it uses `request.waitUntil` when available because the scheduler's HTTP call times out quickly.
+- Note inputs are plain `<textarea>` elements with no key handlers; only the save is delayed, and saves read the textarea's DOM value (plus a light poll) as the source of truth. Why: voice dictation tools type into them, some without firing input events.
+- Browser data reads use the Supabase client with RLS (`src/lib/queries.ts`); signed-in pages live under `src/routes/_authenticated/` (client-only gate).
+- Report building lives in `src/lib/reports.server.ts` (`buildReport`), shared by the Reports page and the weekly email; every query filters by `user_id` explicitly. Why: the weekly job runs with the admin client, which bypasses RLS.
+- Weekly report emails go out through the builder's Gmail connector (`src/lib/gmail.server.ts`) from an hourly managed HTTP schedule calling `/api/public/jobs/weekly-report-email`; the send rule (`weeklyEmailDue`) is local first-day-of-week from a fixed hour, deduped by `profiles.weekly_email_last_period`. Why: users have different timezones and week starts, and a week must never be emailed twice.
+- Share links are HMAC-signed tokens `<shareId>.<exp>.<sig>` (`src/lib/share-token.ts`, key `SHARE_LINK_SIGNING_KEY`) backed by a `report_shares` row for revocation; the public `/share/$token` page reads through `getSharedReport`, which verifies signature, expiry and revocation before any admin read. Why: managers open links without an account, so the token is the only credential.
+- Google Calendar is a per-user App User Connector; encrypted connection keys live in `app_user_connections` (service role only), meetings are fetched live (`src/lib/calendar.server.ts`) and filtered in code (`src/lib/meetings.ts`), never stored. Why: each user's calendar is private to them and only the standup and Log page need it.
+- Insight numbers are computed in `src/lib/insights.ts` from stored rows in the browser. Why: same rule as stats, no model-made numbers.
